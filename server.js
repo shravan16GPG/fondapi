@@ -10,17 +10,14 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "./config.env" });
 const port = process.env.PORT;
 const api = require("./api");
-
+console.log(process.env.DATABASE)
 const DB = process.env.DATABASE.replace(
   "<password>",
   process.env.DATABASE_PASSWORD
 );
 
 mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(DB)
   .then(() => console.log("DB connection successful!"));
 
 const server = api.listen(port, () => {
